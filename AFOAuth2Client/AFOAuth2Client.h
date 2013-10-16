@@ -249,7 +249,8 @@
 #ifdef _SECURITY_SECITEM_H_
 /**
  Stores the specified OAuth credential for a given web service identifier in the Keychain.
- 
+ with the default Keychain Accessibilty of kSecAttrAccessibleWhenUnlocked.
+
  @param credential The OAuth credential to be stored.
  @param identifier The service identifier associated with the specified credential.
  
@@ -257,6 +258,19 @@
  */
 + (BOOL)storeCredential:(AFOAuthCredential *)credential
          withIdentifier:(NSString *)identifier;
+
+/**
+ Stores the specified OAuth token for a given web service identifier in the Keychain.
+
+ @param token The OAuth credential to be stored.
+ @param identifier The service identifier associated with the specified token.
+ @param securityAccessibility The Keychain security accessibility to store the credential with.
+
+ @return Whether or not the credential was stored in the keychain.
+ */
++ (BOOL)storeCredential:(AFOAuthCredential *)credential
+         withIdentifier:(NSString *)identifier
+      withAccessibility:(id)securityAccessibility;
 
 /**
  Retrieves the OAuth credential stored with the specified service identifier from the Keychain.
